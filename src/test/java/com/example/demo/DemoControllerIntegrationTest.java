@@ -10,8 +10,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.emptyString;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -41,8 +40,6 @@ class DemoControllerIntegrationTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.msg", equalTo("test pong")))
                 .andReturn();
-
-        System.out.println(mvcResult);
     }
 
     @Test
@@ -59,7 +56,7 @@ class DemoControllerIntegrationTest {
                 .andReturn();
 
         // It should not be an empty string
-        assertThat(mvcResult.getResponse().getContentAsString(), emptyString());
+        assertThat(mvcResult.getResponse().getContentAsString(), not(emptyString()));
     }
 
 }
