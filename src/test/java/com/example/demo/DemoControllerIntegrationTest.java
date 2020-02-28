@@ -31,15 +31,14 @@ class DemoControllerIntegrationTest {
         DemoRequest request = new DemoRequest();
         request.setMsg("test");
 
-        MvcResult mvcResult = mockMvc.perform(
+        mockMvc.perform(
                 post("/ping")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(request))
         )
                 .andDo(print())
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.msg", equalTo("test pong")))
-                .andReturn();
+                .andExpect(jsonPath("$.msg", equalTo("test pong")));
     }
 
     @Test
